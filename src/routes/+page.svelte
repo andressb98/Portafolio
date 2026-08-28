@@ -10,6 +10,8 @@
 	import MascotaEjecutiva from '$lib/components/MascotaEjecutiva.svelte';
 
 	import { reveal } from '$lib/components/actions/reveal';
+	import { fall } from '$lib/components/actions/fall';
+	import { fallLetters } from '$lib/components/actions/fallLetters';
 
 	const featuredProjects = projects.slice(0, 3);
 </script>
@@ -30,16 +32,18 @@
 		<!-- Contenido Frontal (aseguramos que esté por encima con z-10) -->
 		<div class="relative z-10 px-4">
 			<h1
+				use:fallLetters={{ stagger: 40, duration: 700, y: -50 }}
 				class="mb-6 text-5xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm md:text-7xl dark:text-white"
 			>
-				Soluciones <span
-					use:reveal
-					class="bg-linear-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent"
-					>Digitales</span
-				> a Medida
+				Soluciones
+				<span class="bg-linear-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent">
+					Digitales
+				</span>
+				a Medida
 			</h1>
+
 			<p
-				use:reveal
+				use:fall={{ duration: 1000, y: -30, delay: 800 }}
 				class="mx-auto mt-4 mb-10 max-w-3xl text-xl text-gray-600 drop-shadow-sm md:text-2xl dark:text-gray-300"
 			>
 				Desarrollo de software escalable, arquitecturas full-stack y optimización de procesos

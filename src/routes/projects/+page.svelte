@@ -2,6 +2,10 @@
 	import { projects } from '$lib/data/projects';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
+	import { reveal } from '$lib/components/actions/reveal';
+	import { fall } from '$lib/components/actions/fall';
+	import { fallLetters } from '$lib/components/actions/fallLetters';
+
 	const cardWidth = 320;
 	const numCards = projects.length;
 	const angle = 360 / numCards;
@@ -18,11 +22,15 @@
 
 	<header class="relative z-10 mb-16 text-center">
 		<h1
+			use:fallLetters={{ stagger: 40, duration: 700, y: -50 }}
 			class="mb-4 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent md:text-5xl"
 		>
 			Mi Trabajo
 		</h1>
-		<p class="mx-auto max-w-3xl text-lg text-gray-400">
+		<p
+			use:fall={{ duration: 1000, y: -30, delay: 800 }}
+			class="mx-auto max-w-3xl text-lg text-gray-400"
+		>
 			Explora mi catálogo de desarrollos girando en este espacio tridimensional.
 		</p>
 	</header>
@@ -35,6 +43,7 @@
 		<div class="carousel hover:pause-animation">
 			{#each projects as project, i (project.slug)}
 				<div
+					use:reveal
 					class="carousel-item rounded-xl shadow-2xl shadow-black/50"
 					style="transform: rotateY({i * angle}deg) translateZ({radius}px);"
 				>

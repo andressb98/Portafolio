@@ -58,8 +58,16 @@
 		<div class="flex h-16 items-center justify-between">
 			<!-- Marca -->
 			<div class="flex flex-shrink-0 items-center">
-				<a href={resolve('/')} class="text-xl font-bold text-gray-900 dark:text-white">
-					Servicios digitales SOLBAU
+				<a
+					href={resolve('/')}
+					class="flex items-center gap-3 text-xl font-bold text-gray-900 dark:text-white"
+				>
+					<img
+						src="/images/Empresa/logo.jpg"
+						alt="Logo SOLBAU"
+						class="h-11 w-auto rounded-lg border border-gray-200 bg-white p-1 shadow-sm dark:border-gray-700/60"
+					/>
+					<span>Servicios digitales SOLBAU</span>
 				</a>
 			</div>
 

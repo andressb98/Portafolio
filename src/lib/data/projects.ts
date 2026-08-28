@@ -118,7 +118,7 @@ export const projects = [
 		title: 'Punto de Venta',
 		description: 'Plataforma de comercio electrónico para la venta de productos tradicionales.',
 		tech: ['SvelteKit', 'Prisma', 'Tailwind CSS'],
-		image: '/images/PuntoVenta/dashboard.png',
+		image: '/images/PuntoVenta/nuevaVenta.png',
 		github: 'https://github.com/andressb98/PuntoVenta',
 		gallery: [
 			{

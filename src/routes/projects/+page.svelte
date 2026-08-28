@@ -1,38 +1,92 @@
 <script lang="ts">
-  // Importamos el arreglo completo de proyectos
-  // Ajusta la ruta '$lib/data/projects' según la ubicación real de tu archivo projects.ts
-  import { projects } from '$lib/data/projects'; 
-  
-  // Importamos tu componente ProjectCard
-  import ProjectCard from '$lib/components/ProjectCard.svelte';
+	import { projects } from '$lib/data/projects';
+	import ProjectCard from '$lib/components/ProjectCard.svelte';
+
+	const cardWidth = 320;
+	const numCards = projects.length;
+	const angle = 360 / numCards;
+	const radius = Math.max(500, Math.round(cardWidth / 2 / Math.tan(Math.PI / numCards)) + 200);
 </script>
 
-<svelte:head>
-  <title>Proyectos | Servicios digitales Rana</title>
-  <meta name="description" content="Catálogo completo de proyectos de desarrollo de software, aplicaciones web y plataformas full-stack." />
-</svelte:head>
+<div class="relative flex min-h-[90vh] flex-col justify-center overflow-hidden py-12 md:py-16">
+	<div
+		class="pointer-events-none absolute top-0 left-1/2 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-blue-600/15 blur-[120px]"
+	></div>
+	<div
+		class="pointer-events-none absolute bottom-0 left-1/2 h-[300px] w-[800px] -translate-x-1/2 rounded-[100%] bg-emerald-500/10 blur-[100px]"
+	></div>
 
-<div class="py-8 md:py-12">
-  
-  <!-- Encabezado de la Galería -->
-  <header class="mb-12 text-center md:text-left">
-    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
-      Mi Trabajo
-    </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">
-      Explora mi catálogo completo de desarrollos, que abarca desde simuladores logísticos con mapas interactivos y plataformas e-commerce, hasta sistemas integrales de gestión.
-    </p>
-  </header>
+	<header class="relative z-10 mb-16 text-center">
+		<h1
+			class="mb-4 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent md:text-5xl"
+		>
+			Mi Trabajo
+		</h1>
+		<p class="mx-auto max-w-3xl text-lg text-gray-400">
+			Explora mi catálogo de desarrollos girando en este espacio tridimensional.
+		</p>
+	</header>
 
-  <!-- Cuadrícula CSS (CSS Grid) para las tarjetas -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {#each projects as project (project.slug)}
-      <!-- 
-        Pasamos la variable 'project' de la iteración como prop al componente.
-        Usar (project.slug) como clave de iteración ayuda a Svelte a renderizar la lista más rápido.
-      -->
-      <ProjectCard {project} />
-    {/each}
-  </div>
-
+	<!-- Máscara ajustada al 25% y 75% para un desvanecimiento lateral más limpio -->
+	<div
+		class="scene"
+		style="mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);"
+	>
+		<div class="carousel hover:pause-animation">
+			{#each projects as project, i (project.slug)}
+				<div
+					class="carousel-item rounded-xl shadow-2xl shadow-black/50"
+					style="transform: rotateY({i * angle}deg) translateZ({radius}px);"
+				>
+					<div class="h-[480px] w-[320px]">
+						<ProjectCard {project} />
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
 </div>
+
+<style>
+	.scene {
+		position: relative;
+		width: 100%;
+		height: 550px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		perspective: 1500px;
+	}
+
+	.carousel {
+		position: relative;
+		width: 320px;
+		height: 480px;
+		transform-style: preserve-3d;
+		animation: spin-carousel 80s infinite linear;
+	}
+
+	.hover\:pause-animation:hover {
+		animation-play-state: paused;
+	}
+
+	.carousel-item {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 320px;
+		height: 480px;
+		/* ESTA ES LA CLAVE: Oculta la tarjeta en cuanto da la espalda */
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+	}
+
+	@keyframes spin-carousel {
+		0% {
+			transform: translateZ(-300px) rotateX(-5deg) rotateY(0deg);
+		}
+		100% {
+			transform: translateZ(-300px) rotateX(-5deg) rotateY(-360deg);
+		}
+	}
+</style>

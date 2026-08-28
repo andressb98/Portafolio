@@ -4,7 +4,13 @@
 	import { projects } from '$lib/data/projects'; // Asumiendo que guardaste projects.ts aquí
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
-	// Seleccionamos los proyectos destacados (en este caso, los 3 que tienes)
+	import Constelacion from '$lib/components/constelacion.svelte';
+	import MascotaPuntoComa from '$lib/components/MascotaPuntoComa.svelte';
+	import MascotaMusculosa from '$lib/components/MascotaMusculosa.svelte';
+	import MascotaEjecutiva from '$lib/components/MascotaEjecutiva.svelte';
+
+	import { reveal } from '$lib/components/actions/reveal';
+
 	const featuredProjects = projects.slice(0, 3);
 </script>
 
@@ -15,57 +21,74 @@
 
 <div class="space-y-24 pb-12">
 	<!-- Hero Section -->
-	<section class="flex flex-col items-center justify-center pt-20 text-center md:pt-32">
-		<h1
-			class="mb-6 text-5xl font-extrabold tracking-tight text-gray-900 md:text-7xl dark:text-white"
-		>
-			Soluciones <span
-				class="bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent"
-				>Digitales</span
-			> a Medida
-		</h1>
-		<p class="mx-auto mt-4 mb-10 max-w-3xl text-xl text-gray-600 md:text-2xl dark:text-gray-300">
-			Desarrollo de software escalable, arquitecturas full-stack y optimización de procesos mediante
-			tecnología moderna.
-		</p>
-		<div class="flex flex-col gap-4 sm:flex-row">
-			<a
-				href={resolve('/projects')}
-				class="inline-flex items-center justify-center rounded-lg border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
+	<section
+		class="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden pt-20 text-center md:pt-32"
+	>
+		<!-- Animación de fondo -->
+		<Constelacion />
+
+		<!-- Contenido Frontal (aseguramos que esté por encima con z-10) -->
+		<div class="relative z-10 px-4">
+			<h1
+				class="mb-6 text-5xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm md:text-7xl dark:text-white"
 			>
-				Ver Proyectos
-			</a>
-			<a
-				href={resolve('/contacto')}
-				class="inline-flex items-center justify-center rounded-lg border-2 border-gray-300 bg-transparent px-8 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+				Soluciones <span
+					use:reveal
+					class="bg-linear-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent"
+					>Digitales</span
+				> a Medida
+			</h1>
+			<p
+				use:reveal
+				class="mx-auto mt-4 mb-10 max-w-3xl text-xl text-gray-600 drop-shadow-sm md:text-2xl dark:text-gray-300"
 			>
-				Contáctame
-			</a>
+				Desarrollo de software escalable, arquitecturas full-stack y optimización de procesos
+				mediante tecnología moderna.
+			</p>
+			<div class="flex flex-col justify-center gap-4 sm:flex-row">
+				<a
+					use:reveal
+					href={resolve('/projects')}
+					class="inline-flex items-center justify-center rounded-lg border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white shadow-sm transition-all hover:scale-105 hover:bg-blue-700"
+				>
+					Ver Proyectos
+				</a>
+				<a
+					use:reveal
+					href={resolve('/contacto')}
+					class="inline-flex items-center justify-center rounded-lg border-2 border-gray-300 bg-white/80 px-8 py-3 text-base font-medium text-gray-700 backdrop-blur-sm transition-all hover:scale-105 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900/80 dark:text-gray-200 dark:hover:bg-gray-800"
+				>
+					Contáctame
+				</a>
+			</div>
 		</div>
 	</section>
 
 	<!-- Sobre Mí (Breve) -->
 	<section
-		class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-12 dark:border-gray-800 dark:bg-gray-900"
+		class="relative mt-20 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-12 dark:border-gray-800 dark:bg-gray-900"
 	>
+		<MascotaPuntoComa />
+
 		<div class="mx-auto max-w-4xl">
 			<h2
+				use:reveal
 				class="mb-6 border-b border-gray-200 pb-4 text-3xl font-bold text-gray-900 dark:border-gray-700 dark:text-white"
 			>
 				Sobre Mí
 			</h2>
 			<div class="space-y-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-				<p>
+				<p use:reveal>
 					Soy estudiante de Ingeniería en Sistemas Computacionales en la Universidad Juárez Autónoma
 					de Tabasco (UJAT), con un enfoque fuertemente orientado al desarrollo de software y la
 					resolución de problemas técnicos complejos.
 				</p>
-				<p>
+				<p use:reveal>
 					Me especializo en la construcción de aplicaciones robustas utilizando un ecosistema
 					diverso. En el frontend, aprovecho la reactividad de <strong>SvelteKit</strong> y
 					<strong>JavaScript/TypeScript</strong>
-					para crear interfaces fluidas. En el backend, diseño lógicas de servidor, APIs y modelos
-					de datos relacionales trabajando con <strong>Python</strong>, <strong>Java</strong> y
+					para crear interfaces fluidas. En el backend, diseño lógicas de servidor, APIs y modelos de
+					datos relacionales trabajando con <strong>Python</strong>, <strong>Java</strong> y
 					<strong>PHP</strong>, priorizando siempre la eficiencia del código y arquitecturas
 					mantenibles.
 				</p>
@@ -75,10 +98,13 @@
 
 	<!-- Habilidades Técnicas -->
 	<section
-		class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-12 dark:border-gray-800 dark:bg-gray-900"
+		class="relative mt-20 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-12 dark:border-gray-800 dark:bg-gray-900"
 	>
+		<MascotaMusculosa />
+
 		<div class="mx-auto max-w-5xl">
 			<h2
+				use:reveal
 				class="mb-8 border-b border-gray-200 pb-4 text-3xl font-bold text-gray-900 dark:border-gray-700 dark:text-white"
 			>
 				Habilidades Técnicas
@@ -90,6 +116,7 @@
 					class="group rounded-xl border border-gray-100 bg-gray-50 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/50 dark:hover:border-blue-400"
 				>
 					<div
+						use:reveal
 						class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-600 transition-transform group-hover:scale-110 dark:bg-blue-900/30 dark:text-blue-400"
 					>
 						<svg
@@ -108,11 +135,12 @@
 						</svg>
 					</div>
 					<h3
+						use:reveal
 						class="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400"
 					>
 						Frontend
 					</h3>
-					<p class="leading-relaxed text-gray-600 dark:text-gray-300">
+					<p use:reveal class="leading-relaxed text-gray-600 dark:text-gray-300">
 						SvelteKit, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Bootstrap, Bulma CSS.
 					</p>
 				</div>
@@ -122,6 +150,7 @@
 					class="group rounded-xl border border-gray-100 bg-gray-50 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/50 dark:hover:border-emerald-400"
 				>
 					<div
+						use:reveal
 						class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 transition-transform group-hover:scale-110 dark:bg-emerald-900/30 dark:text-emerald-400"
 					>
 						<svg
@@ -140,11 +169,12 @@
 						</svg>
 					</div>
 					<h3
+						use:reveal
 						class="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400"
 					>
 						Backend & Bases de Datos
 					</h3>
-					<p class="leading-relaxed text-gray-600 dark:text-gray-300">
+					<p use:reveal class="leading-relaxed text-gray-600 dark:text-gray-300">
 						Node.js, Java, PHP, Python, Flask, Prisma, SQLite, MySQL, SQL, Supabase.
 					</p>
 				</div>
@@ -154,6 +184,7 @@
 					class="group rounded-xl border border-gray-100 bg-gray-50 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-purple-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/50 dark:hover:border-purple-400"
 				>
 					<div
+						use:reveal
 						class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100 text-purple-600 transition-transform group-hover:scale-110 dark:bg-purple-900/30 dark:text-purple-400"
 					>
 						<svg
@@ -177,11 +208,12 @@
 						</svg>
 					</div>
 					<h3
+						use:reveal
 						class="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400"
 					>
 						Arquitectura & Tools
 					</h3>
-					<p class="leading-relaxed text-gray-600 dark:text-gray-300">
+					<p use:reveal class="leading-relaxed text-gray-600 dark:text-gray-300">
 						Git / GitHub, REST APIs, Arquitectura CRUD, Programación Orientada a Objetos (POO),
 						Metodologías Ágiles (Sprints).
 					</p>
@@ -192,10 +224,12 @@
 
 	<!-- Experiencia Laboral -->
 	<section
-		class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-12 dark:border-gray-800 dark:bg-gray-900"
+		class="relative mt-20 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm md:p-12 dark:border-gray-800 dark:bg-gray-900"
 	>
+		<MascotaEjecutiva />
 		<div class="mx-auto max-w-5xl">
 			<h2
+				use:reveal
 				class="mb-8 border-b border-gray-200 pb-4 text-3xl font-bold text-gray-900 dark:border-gray-700 dark:text-white"
 			>
 				Experiencia Profesional
@@ -211,13 +245,13 @@
 					></div>
 					<div class="flex flex-col justify-between gap-4 md:flex-row md:items-start">
 						<div>
-							<h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+							<h3 use:reveal class="text-2xl font-bold text-gray-900 dark:text-white">
 								Desarrollador FullStack
 							</h3>
-							<p class="mb-1 text-lg font-medium text-emerald-600 dark:text-emerald-400">
+							<p use:reveal class="mb-1 text-lg font-medium text-emerald-600 dark:text-emerald-400">
 								Universidad Juárez Autónoma de Tabasco
 							</p>
-							<p class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
+							<p use:reveal class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
 								Diseño de arquitectura y desarrollo de aplicación web para la gestión automatizada
 								de comisiones docentes en 12 divisiones académicas. Implementación de lógica de
 								negocio (roles, permisos, sedes) asegurando un sistema escalable con SvelteKit,
@@ -226,6 +260,7 @@
 						</div>
 						<div class="shrink-0">
 							<span
+								use:reveal
 								class="inline-flex items-center rounded-full bg-gray-200 px-3 py-1 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
 							>
 								2025 - Presente
@@ -243,10 +278,10 @@
 					></div>
 					<div class="flex flex-col justify-between gap-4 md:flex-row md:items-start">
 						<div>
-							<h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+							<h3 use:reveal class="text-2xl font-bold text-gray-900 dark:text-white">
 								Desarrollador Freelancer
 							</h3>
-							<p class="mb-1 text-lg font-medium text-blue-600 dark:text-blue-400">
+							<p use:reveal class="mb-1 text-lg font-medium text-blue-600 dark:text-blue-400">
 								Integra Tecnologías
 							</p>
 							<p class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
@@ -258,6 +293,7 @@
 						</div>
 						<div class="shrink-0">
 							<span
+								use:reveal
 								class="inline-flex items-center rounded-full bg-gray-200 px-3 py-1 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
 							>
 								Ene 2025 - May 2025
@@ -275,13 +311,13 @@
 					></div>
 					<div class="flex flex-col justify-between gap-4 md:flex-row md:items-start">
 						<div>
-							<h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+							<h3 use:reveal class="text-2xl font-bold text-gray-900 dark:text-white">
 								Desarrollador de Software Independiente
 							</h3>
-							<p class="mb-1 text-lg font-medium text-purple-600 dark:text-purple-400">
+							<p use:reveal class="mb-1 text-lg font-medium text-purple-600 dark:text-purple-400">
 								AHO Soluciones
 							</p>
-							<p class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
+							<p use:reveal class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
 								Creación de soluciones integrales a medida. Desarrollo de sistemas CRUD, plataformas
 								e-commerce y aplicaciones de optimización logística y enrutamiento (CVRP) para
 								gestión eficiente de pedidos y vehículos.
@@ -289,6 +325,7 @@
 						</div>
 						<div class="shrink-0">
 							<span
+								use:reveal
 								class="inline-flex items-center rounded-full bg-gray-200 px-3 py-1 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
 							>
 								Proyectos Continuos
@@ -305,6 +342,7 @@
 		<div class="mb-8 flex items-end justify-between">
 			<h2 class="text-3xl font-bold text-gray-900 dark:text-white">Proyectos Destacados</h2>
 			<a
+				use:reveal
 				href={resolve('/projects')}
 				class="font-medium text-blue-600 hover:underline dark:text-blue-400"
 			>
@@ -312,7 +350,7 @@
 			</a>
 		</div>
 
-		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+		<div use:reveal class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			{#each featuredProjects as project (project.slug)}
 				<ProjectCard {project} />
 			{/each}

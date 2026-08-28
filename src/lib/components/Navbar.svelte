@@ -59,7 +59,7 @@
 			<!-- Marca -->
 			<div class="flex flex-shrink-0 items-center">
 				<a href={resolve('/')} class="text-xl font-bold text-gray-900 dark:text-white">
-					Servicios digitales Rana
+					Servicios digitales SOLBAU
 				</a>
 			</div>
 

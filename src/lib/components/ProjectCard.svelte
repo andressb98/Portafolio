@@ -1,56 +1,61 @@
 <script lang="ts">
-  import { resolve } from '$app/paths';
+	import { resolve } from '$app/paths';
 
-  // Definimos la estructura exacta que esperas recibir
-  interface Project {
-    slug: string;
-    title: string;
-    description: string;
-    tech: string[];
-    image: string;
-    github: string;
-  }
+	interface Project {
+		slug: string;
+		title: string;
+		description: string;
+		tech: string[];
+		image: string;
+		github: string;
+	}
 
-  // Recibimos el objeto del proyecto como propiedad
-  let { project }: { project: Project } = $props();
+	let { project }: { project: Project } = $props();
 </script>
 
-<!-- 
-  Envolvemos todo en una etiqueta <a>. 
-  'group' nos permite animar elementos internos cuando se hace hover en la tarjeta principal.
--->
-<a 
-  href={resolve(`/projects/${project.slug}`)} 
-  class="group flex flex-col bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+<a
+	href={resolve(`/projects/${project.slug}`)}
+	class="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 dark:bg-slate-800 dark:hover:shadow-blue-500/10"
 >
-  <!-- Contenedor de la Imagen -->
-  <div class="relative w-full h-48 overflow-hidden bg-gray-100">
-    <img 
-      src={project.image} 
-      alt="Captura de pantalla de {project.title}" 
-      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-    />
-  </div>
+	<!-- Contenedor de la Imagen -->
+	<!-- Añadimos border-b para separar mejor la imagen del texto en modo oscuro -->
+	<div
+		class="relative h-48 w-full overflow-hidden border-b border-gray-100 bg-gray-100 dark:border-slate-700 dark:bg-slate-900"
+	>
+		<img
+			src={project.image}
+			alt="Captura de pantalla de {project.title}"
+			class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+		/>
+		<!-- Opcional: Un pequeño overlay gradiente para hacerla ver más premium -->
+		<div
+			class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+		></div>
+	</div>
 
-  <!-- Contenedor del Contenido -->
-  <div class="flex flex-col flex-grow p-5">
-    <!-- Título -->
-    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-      {project.title}
-    </h3>
+	<!-- Contenedor del Contenido -->
+	<div class="flex flex-grow flex-col p-6">
+		<!-- Título -->
+		<h3
+			class="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400"
+		>
+			{project.title}
+		</h3>
 
-    <!-- Descripción (line-clamp-3 limita el texto a 3 líneas) -->
-    <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
-      {project.description}
-    </p>
+		<!-- Descripción -->
+		<p class="mb-6 line-clamp-3 flex-grow text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+			{project.description}
+		</p>
 
-    <!-- Píldoras de Tecnologías -->
-    <ul class="flex flex-wrap gap-2 mt-auto">
-      {#each project.tech as tech (tech)}
-        <li class="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-md border border-gray-200">
-          {tech}
-        </li>
-      {/each}
-    </ul>
-  </div>
+		<!-- Píldoras de Tecnologías -->
+		<ul class="mt-auto flex flex-wrap gap-2">
+			{#each project.tech as tech (tech)}
+				<li
+					class="rounded-md border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-700 transition-colors dark:border-slate-600/50 dark:bg-slate-900/50 dark:text-gray-300"
+				>
+					{tech}
+				</li>
+			{/each}
+		</ul>
+	</div>
 </a>

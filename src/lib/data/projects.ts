@@ -144,5 +144,42 @@ export const projects = [
 		solution:
 			'Se implementó un sistema de gestión de ventas y almacenes con CRUD y autenticación, integrando el sistema de gestión de clientes con el sistema de gestión de ventas y almacenes.',
 		technologies: ['SvelteKit', 'TypeScript', 'Prisma', 'Bulma CSS', 'SQLite']
+	},
+	{
+		slug: 'AutobusesMexicanos',
+		title: 'Autobuses Mexicanos',
+		description: 'Plataforma de publicidad para autobuses de manera digital.',
+		tech: ['SvelteKit', 'Prisma', 'Tailwind CSS'],
+		image: '/images/autobuses/autobuses2.png',
+		github: 'https://github.com/andressb98/AutobusesMexicanos',
+		gallery: [
+			{
+				src: '/images/autobuses/autobuses2.png',
+				alt: 'Dashboard',
+				description: 'Página principal del panel de control con la lista de servicios.'
+			},
+			{
+				src: '/images/autobuses/autobuses1.png',
+				alt: 'Servicios',
+				description: 'Página de servicios con la lista de servicios y sus opciones.'
+			},
+			{
+				src: '/images/autobuses/sobrenosotros.png',
+				alt: 'Clientes',
+				description: 'Página de clientes con la lista de clientes y sus opciones.'
+			},
+			{
+				src: '/images/autobuses/sobrenosotros2.png',
+				alt: 'Sobre nosotros',
+				description: 'Página sobre nosotros con la lista de clientes y sus opciones.'
+			}
+		],
+		challenges: [
+			'Implementación de un sistema para la gestión de servicios de transporte.',
+			'Integración de un sistema de gestión de boletos.'
+		],
+		solution:
+			'Se implementó un sistema de gestión de servicios de transporte con publicidad, integrando el sistema de gestión de boletos.',
+		technologies: ['SvelteKit', 'TypeScript', 'Prisma', 'Bulma CSS', 'SQLite']
 	}
 ];

@@ -11,6 +11,7 @@
 	const links: NavLink[] = [
 		{ name: 'Inicio', href: '/' },
 		{ name: 'Proyectos', href: '/projects' },
+		{name: 'Mis Servicios', href: '/mis_servicios'},
 		{ name: 'Sobre Mí', href: '/sobre_mi' },
 		{ name: 'Contacto', href: '/contacto' }
 	];

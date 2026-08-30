@@ -9,7 +9,7 @@
 	const cardWidth = 320;
 	const numCards = projects.length;
 	const angle = 360 / numCards;
-	const radius = Math.max(500, Math.round(cardWidth / 2 / Math.tan(Math.PI / numCards)) + 200);
+	const radius = Math.max(500, Math.round(cardWidth / 3 / Math.tan(Math.PI / numCards)) + 200);
 </script>
 
 <div class="relative flex min-h-[90vh] flex-col justify-center overflow-hidden py-12 md:py-16">

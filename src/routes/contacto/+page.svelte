@@ -1,5 +1,7 @@
 <script lang="ts">
-  // Variables para manejar el estado del formulario (puedes conectarlas a tu backend/API después)
+  import {reveal} from '$lib/components/actions/reveal';
+  import { fallLetters } from '$lib/components/actions/fallLetters';
+
   let formData = {
     nombre: '',
     email: '',
@@ -12,8 +14,6 @@
 
   const handleSubmit = async () => {
     enviando = true;
-    // Aquí iría tu lógica para enviar el correo (ej. fetch a tu endpoint, Formspree, Resend, etc.)
-    // Simulamos un retraso
     await new Promise(resolve => setTimeout(resolve, 1500));
     enviando = false;
     mensajeEnviado = true;
@@ -33,10 +33,10 @@
 
 <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
   <div class="text-center mb-16">
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-4">
-      Hablemos de tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">Próximo Proyecto</span>
+    <h1 use:fallLetters={{ stagger: 40, duration: 700, y: -50 }} class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-4">
+      Hablemos de tu <span class="text-glow-trace">Próximo Proyecto</span>
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+    <p use:reveal class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
       ¿Necesitas una solución web a medida, un punto de venta o un sistema administrativo? Escríbeme y analicemos cómo puedo ayudarte a optimizar tus procesos.
     </p>
   </div>
@@ -45,7 +45,7 @@
     
     <!-- Información de Contacto (Izquierda) -->
     <div class="p-8 md:p-12 bg-gray-50 dark:bg-gray-800/50 flex flex-col justify-center">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Información Directa</h2>
+      <h2 use:reveal class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Información Directa</h2>
       
       <div class="space-y-6">
         <!-- Teléfono -->
@@ -58,8 +58,8 @@
             </div>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Teléfono / WhatsApp</p>
-            <p class="text-lg font-semibold text-gray-900 dark:text-white mt-1">+52 937 203 63 07</p>
+            <p use:reveal class="text-sm font-medium text-gray-500 dark:text-gray-400">Teléfono / WhatsApp</p>
+            <p use:reveal class="text-lg font-semibold text-gray-900 dark:text-white mt-1">+52 937 203 63 07</p>
           </div>
         </div>
 
@@ -73,8 +73,8 @@
             </div>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Correo Electrónico</p>
-            <a href="mailto:andressolisbautista15@gmail.com" class="text-lg font-semibold text-gray-900 dark:text-white mt-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <p use:reveal class="text-sm font-medium text-gray-500 dark:text-gray-400">Correo Electrónico</p>
+            <a use:reveal href="mailto:andressolisbautista15@gmail.com" class="text-lg font-semibold text-gray-900 dark:text-white mt-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               andressolisbautista15@gmail.com
             </a>
           </div>
@@ -91,30 +91,9 @@
             </div>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Ubicación</p>
-            <p class="text-lg font-semibold text-gray-900 dark:text-white mt-1">Centro, Cunduacán, Tab.</p>
+            <p use:reveal class="text-sm font-medium text-gray-500 dark:text-gray-400">Ubicación</p>
+            <p use:reveal class="text-lg font-semibold text-gray-900 dark:text-white mt-1">Centro, Cunduacán, Tab.</p>
           </div>
-        </div>
-      </div>
-
-      <!-- Redes Sociales -->
-      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4">Encuéntrame en</p>
-        <div class="flex space-x-4">
-          <!-- GitHub Icon -->
-          <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
-            <span class="sr-only">GitHub</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-            </svg>
-          </a>
-          <!-- LinkedIn Icon -->
-          <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-600 transition-colors">
-            <span class="sr-only">LinkedIn</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
-            </svg>
-          </a>
         </div>
       </div>
     </div>
@@ -129,58 +108,80 @@
           </div>
         {/if}
 
+        <!-- Input Nombre -->
         <div>
-          <label for="nombre" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre</label>
-          <input 
-            type="text" 
-            id="nombre" 
-            bind:value={formData.nombre}
-            required
-            class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-            placeholder="Tu nombre completo"
-          >
+          <label use:reveal for="nombre" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre</label>
+          <div class="relative group p-[2px] rounded-lg overflow-hidden">
+            <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <!-- Efecto Glow (Borde Resplandeciente) -->
+            <div class="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_70%,theme(colors.blue.500)_85%,theme(colors.emerald.400)_100%)] opacity-30 group-hover:opacity-70 group-focus-within:opacity-100 transition-opacity duration-500"></div>
+            <!-- Input Real -->
+            <input use:reveal
+              type="text" 
+              id="nombre" 
+              bind:value={formData.nombre}
+              required
+              class="relative z-10 w-full px-4 py-3 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white outline-none focus:ring-0 transition-all placeholder-gray-400 dark:placeholder-gray-500"
+              placeholder="Tu nombre completo"
+            >
+          </div>
         </div>
 
+        <!-- Input Email -->
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Correo Electrónico</label>
-          <input 
-            type="email" 
-            id="email" 
-            bind:value={formData.email}
-            required
-            class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-            placeholder="ejemplo@correo.com"
-          >
+          <label use:reveal for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Correo Electrónico</label>
+          <div class="relative group p-[2px] rounded-lg overflow-hidden">
+            <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <div class="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_70%,theme(colors.blue.500)_85%,theme(colors.emerald.400)_100%)] opacity-30 group-hover:opacity-70 group-focus-within:opacity-100 transition-opacity duration-500"></div>
+            <input use:reveal
+              type="email" 
+              id="email" 
+              bind:value={formData.email}
+              required
+              class="relative z-10 w-full px-4 py-3 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white outline-none focus:ring-0 transition-all placeholder-gray-400 dark:placeholder-gray-500"
+              placeholder="ejemplo@correo.com"
+            >
+          </div>
         </div>
 
+        <!-- Input Asunto -->
         <div>
-          <label for="asunto" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Asunto</label>
-          <input 
-            type="text" 
-            id="asunto" 
-            bind:value={formData.asunto}
-            required
-            class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-            placeholder="Desarrollo de sistema, Cotización, etc."
-          >
+          <label use:reveal for="asunto" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Asunto</label>
+          <div class="relative group p-[2px] rounded-lg overflow-hidden">
+            <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <div class="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_70%,theme(colors.blue.500)_85%,theme(colors.emerald.400)_100%)] opacity-30 group-hover:opacity-70 group-focus-within:opacity-100 transition-opacity duration-500"></div>
+            <input use:reveal
+              type="text" 
+              id="asunto" 
+              bind:value={formData.asunto}
+              required
+              class="relative z-10 w-full px-4 py-3 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white outline-none focus:ring-0 transition-all placeholder-gray-400 dark:placeholder-gray-500"
+              placeholder="Desarrollo de sistema, Cotización, etc."
+            >
+          </div>
         </div>
 
+        <!-- Textarea Mensaje -->
         <div>
-          <label for="mensaje" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mensaje</label>
-          <textarea 
-            id="mensaje" 
-            rows="4" 
-            bind:value={formData.mensaje}
-            required
-            class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
-            placeholder="Cuéntame sobre los requerimientos de tu proyecto..."
-          ></textarea>
+          <label use:reveal for="mensaje" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mensaje</label>
+          <div class="relative group p-[2px] rounded-lg overflow-hidden">
+            <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            <div class="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_70%,theme(colors.blue.500)_85%,theme(colors.emerald.400)_100%)] opacity-30 group-hover:opacity-70 group-focus-within:opacity-100 transition-opacity duration-500"></div>
+            <textarea use:reveal
+              id="mensaje" 
+              rows="4" 
+              bind:value={formData.mensaje}
+              required
+              class="relative z-10 w-full px-4 py-3 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white outline-none focus:ring-0 transition-all resize-none placeholder-gray-400 dark:placeholder-gray-500"
+              placeholder="Cuéntame sobre los requerimientos de tu proyecto..."
+            ></textarea>
+          </div>
         </div>
 
         <button 
           type="submit" 
           disabled={enviando}
-          class="w-full flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed shadow-sm"
+          class="w-full flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
         >
           {#if enviando}
             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -194,6 +195,30 @@
         </button>
       </form>
     </div>
-
   </div>
 </div>
+
+<style>
+  /* Animación para el rastreo en el título (Luz pasando a través del texto) */
+  .text-glow-trace {
+    background: linear-gradient(
+      110deg,
+      #2563eb 0%,        /* blue-600 */
+      #10b981 35%,       /* emerald-500 */
+      #a7f3d0 50%,       /* emerald-200 (El brillo intenso) */
+      #10b981 65%,       /* emerald-500 */
+      #2563eb 100%       /* blue-600 */
+    );
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: text-shine 3s linear infinite;
+  }
+
+  @keyframes text-shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+</style>
